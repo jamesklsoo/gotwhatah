@@ -9,4 +9,6 @@ class User < ApplicationRecord
   has_many :votes
 
   belongs_to :location
+
+  enum :status [:newbie, :intermediate, :expert]
 end
