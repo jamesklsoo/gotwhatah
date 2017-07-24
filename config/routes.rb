@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  root 'welcome#index'
+  
   resources :votes
   resources :comments
   resources :events
