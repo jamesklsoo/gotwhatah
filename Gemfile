@@ -33,6 +33,15 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+
+
+# Upload photos
+gem 'carrierwave', '~> 1.0'
+gem 'carrierwave-aws'
+
+# Share to Facebook
+gem 'social-share-button'
+
 # User authentication
 gem "clearance"
 gem "figaro"
@@ -49,6 +58,7 @@ gem 'will_paginate', '~> 3.1.0'
 
 # Upload photos
 gem "paperclip", "~> 5.0.0"
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
