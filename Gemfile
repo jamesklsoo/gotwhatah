@@ -43,9 +43,8 @@ gem 'carrierwave-aws'
 gem 'social-share-button'
 
 # User authentication
-gem "clearance"
 gem "figaro"
-
+gem "clearance"
 # Facebook authentication
 gem 'omniauth'
 gem 'omniauth-facebook'
