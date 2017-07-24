@@ -12,13 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :user_id %>
-    <%= form.number_field :user_id, id: :event_user_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :location_id %>
-    <%= form.number_field :location_id, id: :event_location_id %>
+    <%= form.label :area %>
+    <%= form.select :area, options_for_select([["Subang Jaya", "subang_jaya"], ["Damansara", "damansara"], ["TTDI", "ttdi"]]) %>
   </div>
 
   <div class="field">
@@ -43,7 +38,7 @@
 
   <div class="field">
     <%= form.label :category %>
-    <%= form.number_field :category, id: :event_category %>
+    <%= form.select :category, options_for_select([["Food", "food"], ["Lifestyle", "lifestyle"], ["Entertainment", "entertainment"]]) %>
   </div>
 
   <div class="actions">

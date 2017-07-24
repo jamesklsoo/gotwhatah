@@ -7,7 +7,6 @@
 <table>
   <thead>
     <tr>
-      <th>User</th>
       <th>Location</th>
       <th>Title</th>
       <th>Category</th>
@@ -16,14 +15,12 @@
   </thead>
 
   <tbody>
-    <% @events.each do |event| %>
+      <% @events.each do |event| %>
       <tr>
-        <td><%= event.user_id %></td>
-        <td><%= event.location_id %></td>
+        <td><%= event.area %></td>
         <td><%= event.title %></td>
-        <td><%= event.category %></td>
-        <td><%= link_to "see this event", event_path(event.id) %></td>
-     </tr>
+        <td><%= event.category %></td> 
+      </tr>
     <% end %>
   </tbody>
 </table>
