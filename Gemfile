@@ -33,6 +33,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+<<<<<<< HEAD
 
 # Upload photos
 gem 'carrierwave', '~> 1.0'
@@ -40,6 +41,24 @@ gem 'carrierwave-aws'
 
 # Share to Facebook
 gem 'social-share-button'
+=======
+# User authentication
+gem "clearance"
+gem "figaro"
+
+# Facebook authentication
+gem 'omniauth'
+gem 'omniauth-facebook'
+
+# Bootstrap
+gem 'bootstrap-sass', '~> 3.3.6'
+
+# Page
+gem 'will_paginate', '~> 3.1.0'
+
+# Upload photos
+gem "paperclip", "~> 5.0.0"
+>>>>>>> voting
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
