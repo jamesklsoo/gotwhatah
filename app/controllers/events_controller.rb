@@ -24,7 +24,7 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-   
+
     @event = current_user.events.new(event_params)
 
     respond_to do |format|
@@ -62,14 +62,28 @@ class EventsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-    end
+  def upvote
+    @event = Event.find(params[:id])
+    @event.upvote_by current_user
+    redirect_to events_path
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def event_params
-      params.require(:event).permit(:user_id, :area, :title, :description, :start_date, :end_date, :category)
-    end
+  def downvote
+    @event = Event.find(params[:id])
+    @event.downvote_by current_user
+    redirect_to events_path
+  end
+
+
+
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event
+    @event = Event.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def event_params
+    params.require(:event).permit(:user_id, :area, :title, :description, :start_date, :end_date, :category, :upvote, :downvote)
+  end
 end

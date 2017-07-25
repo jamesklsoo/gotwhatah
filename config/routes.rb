@@ -9,11 +9,11 @@ Rails.application.routes.draw do
       only: [:create, :edit, :update]
   end
 
-  resources :users, controller: "users" do 
-    resources :votes, controller: "votes" 
-    resources :events, controller: "events" 
+  resources :users, controller: "users" do
+    resources :votes, controller: "votes"
+    resources :events, controller: "events"
     resources :comments, controller: "comments"
-  end 
+  end
 
   get "/sign_in" => "clearance/sessions#new", as: "sign_in"
   delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
@@ -22,6 +22,13 @@ Rails.application.routes.draw do
 
   resources :locations
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :events do
+    member do
+      put "like", to: "events#upvote"
+      put "dislike", to: "events#downvote"
+    end
+  end
 
   root 'welcome#index'
 
