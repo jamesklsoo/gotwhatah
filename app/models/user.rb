@@ -6,4 +6,14 @@ class User < ApplicationRecord
   has_many :votes
 
   enum status: [:newbie, :intermediate, :expert]
+
+  def check_status(user)
+    if Event.where(user_id: user.id).count == 0 || Event.where(user_id: user.id).count <10
+      user.newbie!
+    elsif Event.where(user_id: user.id).count > 9 || Event.where(user_id: user.id).count <20
+      user.intermediate!
+    else 
+      user.expert!
+    end 
+  end 
 end
