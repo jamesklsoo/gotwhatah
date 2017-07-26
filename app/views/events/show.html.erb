@@ -36,9 +36,5 @@
   <%= @event.get_downvotes.size %>
 </p>
 <br>
-<!-- begin wwww.htmlcommentbox.com -->
-<div id="HCB_comment_box"><a href="http://www.htmlcommentbox.com">Comment Box</a> is loading comments...</div>
-<!-- end www.htmlcommentbox.com -->
-<br>
 <%= link_to 'Edit', edit_event_path(@event.id) %> | <%= link_to 'Delete', event_path(@event.id), method: :delete, data: {confirm: "Are you sure?"} %> |
 <%= link_to 'Back', events_path(@event.id) %>
