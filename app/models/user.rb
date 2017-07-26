@@ -4,6 +4,6 @@ class User < ApplicationRecord
   has_many :events
   has_many :comments
   has_many :votes
-
+  acts_as_voter
   enum status: [:newbie, :intermediate, :expert]
 end

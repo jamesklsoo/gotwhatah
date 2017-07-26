@@ -65,13 +65,23 @@ class EventsController < ApplicationController
   def upvote
     @event = Event.find(params[:id])
     @event.upvote_by current_user
-    redirect_to events_path
+    respond_to do |format|
+      format.html { redirect_to events_url, notice: 'Like was increase.' }
+      format.js { }
+    end
+
+
+
   end
 
   def downvote
     @event = Event.find(params[:id])
     @event.downvote_by current_user
-    redirect_to events_path
+    respond_to do |format|
+      format.html { redirect_to events_url, notice: 'Dislike was increase.' }
+      format.js { }
+    end
+
   end
 
 
