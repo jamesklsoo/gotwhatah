@@ -12,11 +12,6 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :area %>
-    <%= form.select :area, options_for_select([["Subang Jaya", "subang_jaya"], ["Damansara", "damansara"], ["TTDI", "ttdi"]]) %>
-  </div>
-
-  <div class="field">
     <%= form.label :title %>
     <%= form.text_field :title, id: :event_title %>
   </div>
@@ -24,6 +19,11 @@
   <div class="field">
     <%= form.label :description %>
     <%= form.text_field :description, id: :event_description %>
+  </div>
+
+    <div class="field">
+    <%= form.label :address %>
+    <%= form.text_field :address, id: :event_address %>
   </div>
 
   <div class="field">

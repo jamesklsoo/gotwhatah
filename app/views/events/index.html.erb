@@ -6,9 +6,9 @@
   <thead>
     <tr>
       <th>User</th>
-      <th>Location</th>
       <th>Title</th>
       <th>Description</th>
+      <th>Address</th>
       <th>Start date</th>
       <th>End date</th>
       <th>Category</th>
@@ -17,19 +17,45 @@
   </thead>
 
   <tbody>
-    <% @events.each do |event| %>
       <tr>
+       <% @events.each do |event| %>
         <% u= User.find_by_id(event.user_id) %>
         <td><%= link_to u.username, user_path(event.user_id) %>(<%= u.status %>)</td>
-        <td><%= event.area %></td>
-        <td><%= event.title %></td>
+        <td><%= link_to event.title, user_event_path(u.id, event.id) %></td>
         <td><%= event.description %></td>
+        <td><%= event.address %></td>
         <td><%= event.start_date %></td>
         <td><%= event.end_date %></td>
         <td><%= event.category %></td>
-        
       </tr>
     <% end %>
+  </tbody>
+</table>
+
+<h2>Events near you (within 30 kilometres)</h2>
+
+
+  <table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Title</th>
+      <th>Category</th>
+      <th>Distance from you</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <tr> 
+      <% Event.near(current_user.address, 30, :units => :km).each do |t| %>
+        <% u= User.find_by_id(t.user_id) %>
+        <td><%= link_to u.username, user_path(t.user_id) %>(<%= u.status %>)</td>
+        <td><%= link_to t.title, user_event_path(u.id, t.id) %></td>
+        <td><%= t.category %></td>
+        <td><%= t.distance.round(1) %> kilometres</td>
+      </tr>
+      <% end %>
   </tbody>
 </table>
 

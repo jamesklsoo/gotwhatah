@@ -7,6 +7,9 @@ class User < ApplicationRecord
 
   enum status: [:newbie, :intermediate, :expert]
 
+  geocoded_by :address,:latitude => :latitude, :longitude => :longitude
+  after_validation :geocode
+
   def check_status(user)
     if Event.where(user_id: user.id).count == 0 || Event.where(user_id: user.id).count <10
       user.newbie!
