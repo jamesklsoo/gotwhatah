@@ -33,7 +33,11 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 5.0'
 
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
 
 # Upload photos
 gem 'carrierwave', '~> 1.0'
