@@ -1,5 +1,8 @@
 <p id="notice"><%= notice %></p>
-<h1>Events</h1>
+<h1>Got What Ah?</h1>
+<h4>Locate your news anywhere you are</h4>
+<br>
+<h2>Events</h2>
 <table>
   <thead>
     <tr>
@@ -17,6 +20,7 @@
   </thead>
   <tbody>
     <% @events.each do |event| %>
+      <% @events.sort_by { |event| event.get_upvotes.size } %>
       <tr>
         <% u= User.find_by_id(current_user) %>
         <td><%= u.username %></td>
