@@ -3,6 +3,25 @@
 <h4>Locate your news anywhere you are</h4>
 <br>
 <h2>Events</h2>
+<%= form_tag(user_events_path, :method => 'get', id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search events or area" %>
+  <%= select_tag "category_search", options_for_select([["food", "food"], ["lifestyle","lifestyle"], ["entertainment","entertainment"]]), include_blank: true %>
+  <%= submit_tag "Search", :name => nil %>
+<% end %>
+<% if @event_search.blank? %>
+  <p>There are no events containing the term "<%= params[:search] %>".</p>
+<% else %>
+  <tr>
+    <% @event_search.each do |t| %>
+      <% u= User.find_by_id(t.user_id) %>
+      <td><%= link_to u.username, user_path(t.user_id) %>(<%= u.status %>)</td>
+      <td><%= link_to t.title, user_event_path(u.id, t.id) %></td>
+      <td><%= t.category %></td>
+      <td><%= current_user.distance_to(t.address).round(1) %> kilometres </td>
+    </tr>
+    <br>
+  <% end %>
+<% end %>
 <table>
   <thead>
     <tr>
@@ -10,6 +29,7 @@
       <th>Location</th>
       <th>Title</th>
       <th>Description</th>
+      <th>Address</th>
       <th>Start date</th>
       <th>End date</th>
       <th>Category</th>
@@ -30,6 +50,7 @@
           <br>
           <%= link_to "#{event.title}", user_event_path(event.user_id, event.id) %></td>
         <td><%= event.description %></td>
+        <td><%= event.address %></td>
         <td><%= event.start_date %></td>
         <td><%= event.end_date %></td>
         <td><%= event.category %></td>
@@ -51,5 +72,29 @@
   </tbody>
 </table>
 <br>
-<%= link_to 'New Event', new_user_event_path(@events) %>
+<h2>Events near you (within 30 kilometres)</h2>
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Title</th>
+      <th>Category</th>
+      <th>Distance from you</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% Event.near(current_user.address, 30).each do |t| %>
+        <% u= User.find_by_id(t.user_id) %>
+        <td><%= link_to u.username, user_path(t.user_id) %>(<%= u.status %>)</td>
+        <td><%= link_to t.title, user_event_path(u.id, t.id) %></td>
+        <td><%= t.category %></td>
+        <td><%= t.distance.round(1) %> kilometres</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<%= link_to 'New Event', new_user_event_path %>
 <%= button_to "Sign Out", sign_out_path, method: :delete %>

@@ -21,6 +21,10 @@
   <%= @event.description %>
 </p>
 <p>
+  <strong>Address:</strong>
+  <%= @event.address %>
+</p>
+<p>
   <strong>Start date:</strong>
   <%= @event.start_date %>
 </p>
@@ -40,9 +44,26 @@
   <strong>Dislikes:</strong>
   <%= @event.get_downvotes.size %>
 </p>
+<p>
+  <strong>Distance from you:</strong>
+  <%= current_user.distance_to(@event.address).round(1) %> kilometres 
+</p>
 <br>
 <p>
   <%= social_share_button_tag("#{@event.title} #{@event.description} #{@event.area}") %>
+</p>
+<br>
+<%= link_to "https://www.google.com/maps/dir/?api=1&origin=#{current_user.latitude},#{current_user.longitude}&destination=#{@event.latitude},#{@event.longitude}" do %>
+  <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?center=#{@event.latitude},#{@event.longitude}&zoom=13&size=600x300&markers=color:blue%7Clabel:E%7C#{@event.latitude},#{@event.longitude}&markers=color:red%7Clabel:U%7C#{current_user.latitude},#{current_user.longitude}&maptype=roadmap&key=#{ENV['GOOGLE_API_KEY']}" %>
+<% end %>
+<p>
+  <strong>User Comments:</strong>
+  <% unless @comment.nil? %>
+    <% @comment.each do |comment| %>
+      <%= User.find_by_id(comment.user_id).username %>
+      <%= comment.description %><br>
+    <% end %>
+  <% end %>
 </p>
 <br>
 <%= link_to 'Back', events_path(@event.id) %>
