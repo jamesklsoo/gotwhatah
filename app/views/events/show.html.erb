@@ -46,12 +46,15 @@
 
 <p>
   <strong>User Comments:</strong>
-  <% unless @event_comment.nil? %>
-    <% @event_comment.each do |comment| %> 
-      <%= comment.description %> 
+  <% unless @comment.nil? %>
+    <% @comment.each do |comment| %> 
+      <%= User.find_by_id(comment.user_id).username %>
+      <%= comment.description %><br>
     <% end %>
   <% end %>
 </p>
+
+<%= link_to 'Add new comment', new_event_comment_path(params[:id]) %>
 
 <%= link_to 'Back', user_events_path %>
 

@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end 
 
   resources :events, controller: "events" do 
-    resources :comments, controller: "comments", only: [:create, :new, :edit]
+    resources :comments, controller: "comments", only: [:create, :new, :update, :destroy]
   end 
 
   get "/sign_in" => "clearance/sessions#new", as: "sign_in"

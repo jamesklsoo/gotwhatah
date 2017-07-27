@@ -3,7 +3,7 @@ class User < ApplicationRecord
 
   has_many :events
   has_many :votes
-  
+  has_many :comments
   enum status: [:newbie, :intermediate, :expert]
 
   geocoded_by :address,:latitude => :latitude, :longitude => :longitude

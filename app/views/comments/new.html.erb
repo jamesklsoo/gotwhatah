@@ -1,0 +1,4 @@
+<%= form_for [@event, @comment] do |form| %>
+  <%= form.text_field :description, type: 'text', placeholder: 'comment here', required: true %>
+  <%= form.submit %>
+<% end %>

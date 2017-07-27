@@ -16,6 +16,7 @@ class EventsController < ApplicationController
   def show
     @event = Event.find_by_id(params[:id])
     @user = User.find_by_id(params[:user_id])
+    @comment = Comment.where(event_id: params[:id])
   end
 
   # GET /events/new
