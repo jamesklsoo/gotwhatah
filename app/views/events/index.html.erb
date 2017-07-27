@@ -8,7 +8,9 @@
   <%= select_tag "category_search", options_for_select([["food", "food"], ["lifestyle","lifestyle"], ["entertainment","entertainment"]]), include_blank: true %>
   <%= submit_tag "Search", :name => nil %>
 <% end %>
-<% if @event_search.blank? %>
+<% if @event_search.nil? %>
+  <p></p>
+<% elsif @event_search.blank? %>
   <p>There are no events containing the term "<%= params[:search] %>".</p>
 <% else %>
   <tr>
