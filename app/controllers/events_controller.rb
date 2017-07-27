@@ -1,15 +1,18 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+
 
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events = Event.order(updated_at: :desc)
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
+    @event = Event.find(params[:id])
   end
 
   # GET /events/new
@@ -70,8 +73,6 @@ class EventsController < ApplicationController
       format.js { }
     end
 
-
-
   end
 
   def downvote
@@ -84,7 +85,12 @@ class EventsController < ApplicationController
 
   end
 
-
+  def correct_user
+    @event = Event.find_by(id: params[:id])
+    unless current_user?(@event.user)
+      redirect_to user_path(current_user)
+    end
+  end
 
   private
   # Use callbacks to share common setup or constraints between actions.
@@ -94,6 +100,6 @@ class EventsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def event_params
-    params.require(:event).permit(:user_id, :area, :title, :description, :start_date, :end_date, :category, :upvote, :downvote)
+    params.require(:event).permit(:user_id, :area, :title, :description, :start_date, :end_date, :category, :upvote, :downvote, {images: []})
   end
 end

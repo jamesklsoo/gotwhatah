@@ -8,6 +8,7 @@
     <tr>
       <th>User</th>
       <th>Location</th>
+      <th></th>
       <th>Title</th>
       <th>Description</th>
       <th>Start date</th>
@@ -20,24 +21,31 @@
   </thead>
   <tbody>
     <% @events.each do |event| %>
-      <% @events.sort_by { |event| event.get_upvotes.size } %>
       <tr>
         <% u= User.find_by_id(current_user) %>
         <td><%= u.username %></td>
         <td><%= event.area %></td>
+        <td><% if !event.images.empty? %>
+            <%= image_tag event.images[0].thumb %>
+          <% end %></td>
         <td><%= link_to "#{event.title}", user_event_path(event.user_id, event.id) %></td>
         <td><%= event.description %></td>
         <td><%= event.start_date %></td>
         <td><%= event.end_date %></td>
         <td><%= event.category %></td>
-        <td><%=link_to like_event_path(event), class: 'btn btn-default btn-sm', :id => "upvote-#{event.id}" , method: :put, remote: true do %>
+        <td>
+          <%=link_to like_event_path(event), class: 'btn btn-default btn-sm', :id => "upvote-#{event.id}" , method: :put, remote: true do %>
             <span class="glyphicon glyphicon-chevron-up"></span>
-            like <span class="votes-count" data-id="<%= event.id %>"><%=event.get_upvotes.size%></span></td>
-        <% end %>
-        <td><%=link_to dislike_event_path(event), class: 'btn btn-default btn-sm vote-button', :id => "downvote-#{event.id}", method: :put, remote: true do %>
+            like <span class="votes-count" data-id="<%= event.id %>"><%=event.get_upvotes.size%></span>
+          <% end %>
+        </td>
+        <td>
+          <%=link_to dislike_event_path(event), class: 'btn btn-default btn-sm vote-button', :id => "downvote-#{event.id}", method: :put, remote: true do %>
             <span class="glyphicon glyphicon-chevron-down"></span>
-            dislike<span class="votes-count" data-id="<%= event.id %>"> <%=event.get_downvotes.size%></span></td>
-        <%end%>
+            dislike<span class="votes-count" data-id="<%= event.id %>"> <%=event.get_downvotes.size%></span>
+          <%end%>
+        </td>
+        <td><%= social_share_button_tag("#{event.title} #{event.description} #{event.area}") %></td>
       </tr>
     <% end %>
   </tbody>

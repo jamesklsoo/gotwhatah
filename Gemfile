@@ -42,6 +42,7 @@ gem 'jquery-rails'
 # Upload photos
 gem 'carrierwave', '~> 1.0'
 gem 'carrierwave-aws'
+gem 'mini_magick'
 
 # Share to Facebook
 gem 'social-share-button'
