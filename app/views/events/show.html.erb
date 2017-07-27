@@ -4,10 +4,6 @@
   <%= @event.user_id %>
 </p>
 <p>
-  <strong>Location:</strong>
-  <%= @event.area %>
-</p>
-<p>
   <strong>Title:</strong>
   <%= @event.title %>
 </p>
@@ -50,7 +46,7 @@
 </p>
 <br>
 <p>
-  <%= social_share_button_tag("#{@event.title} #{@event.description} #{@event.area}") %>
+  <%= social_share_button_tag("#{@event.title} #{@event.description} #{@event.address}") %>
 </p>
 <br>
 <%= link_to "https://www.google.com/maps/dir/?api=1&origin=#{current_user.latitude},#{current_user.longitude}&destination=#{@event.latitude},#{@event.longitude}" do %>
@@ -66,6 +62,7 @@
   <% end %>
 </p>
 <br>
+<%= link_to 'Add new comment', new_event_comment_path(params[:id]) %> | 
 <%= link_to 'Back', events_path(@event.id) %>
 <br>
 <% if current_user == User.find_by_id(Event.find_by_id(params[:id]).user_id)%>

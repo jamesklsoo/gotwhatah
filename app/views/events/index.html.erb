@@ -3,7 +3,7 @@
 <h4>Locate your news anywhere you are</h4>
 <br>
 <h2>Events</h2>
-<%= form_tag(user_events_path, :method => 'get', id: "search-form") do %>
+<%= form_tag(events_path, :method => 'get', id: "search-form") do %>
   <%= text_field_tag :search, params[:search], placeholder: "Search events or area" %>
   <%= select_tag "category_search", options_for_select([["food", "food"], ["lifestyle","lifestyle"], ["entertainment","entertainment"]]), include_blank: true %>
   <%= submit_tag "Search", :name => nil %>
@@ -26,7 +26,6 @@
   <thead>
     <tr>
       <th>User</th>
-      <th>Location</th>
       <th>Title</th>
       <th>Description</th>
       <th>Address</th>
@@ -43,12 +42,13 @@
       <tr>
         <% u= User.find_by_id(event.user_id) %>
         <td><%= u.username %></td>
-        <td><%= event.area %></td>
-        <td><% if !event.images.empty? %>
+        <td>
+          <%= link_to "#{event.title}", user_event_path(event.user_id, event.id) %>
+          <br>
+          <% if !event.images.empty? %>
             <%= image_tag event.images[0].thumb %>
           <% end %>
-          <br>
-          <%= link_to "#{event.title}", user_event_path(event.user_id, event.id) %></td>
+        </td>
         <td><%= event.description %></td>
         <td><%= event.address %></td>
         <td><%= event.start_date %></td>
@@ -66,7 +66,7 @@
             dislike<span class="votes-count" data-id="<%= event.id %>"> <%=event.get_downvotes.size%></span>
           <%end%>
         </td>
-        <td><%= social_share_button_tag("#{event.title} #{event.description} #{event.area}") %></td>
+        <td><%= social_share_button_tag("#{event.title} #{event.description} #{event.address}") %></td>
       </tr>
     <% end %>
   </tbody>
@@ -96,5 +96,5 @@
   </tbody>
 </table>
 <br>
-<%= link_to 'New Event', new_user_event_path %>
+<%= link_to 'New Event', new_user_event_path(current_user.id) %>
 <%= button_to "Sign Out", sign_out_path, method: :delete %>

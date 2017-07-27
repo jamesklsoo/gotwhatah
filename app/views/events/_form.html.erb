@@ -9,10 +9,6 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <%= form.label :area %>
-    <%= form.select :area, options_for_select([["Subang Jaya", "subang_jaya"], ["Damansara", "damansara"], ["TTDI", "ttdi"]]) %>
-  </div>
   <div class="image-field">
     <%= form.label :images %>
     <%= form.file_field :images, multiple: true %>

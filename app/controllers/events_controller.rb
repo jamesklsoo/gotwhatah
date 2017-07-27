@@ -9,7 +9,6 @@ class EventsController < ApplicationController
     @events = Event.order(updated_at: :desc)
 
     if params[:search]
-
       @event_search = Event.category_search(params[:category_search]).search(params[:search]).order("created_at DESC")
     end
   end
