@@ -4,7 +4,7 @@ class UsersController < Clearance::UsersController
     @user = User.new(user_params)
     if @user.save
       sign_in @user
-      redirect_to events_path
+      redirect_to user_events_path(current_user)
     else
       @error = @user.errors.full_messages
       respond_to do |format|
@@ -14,9 +14,13 @@ class UsersController < Clearance::UsersController
     end
   end
 
+  def show
+    @user = User.find_by_id(params[:id])
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:username, :email, :password)
+    params.require(:user).permit(:username, :address, :email, :password)
   end
 end

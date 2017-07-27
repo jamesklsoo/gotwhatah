@@ -8,4 +8,6 @@ class Event < ApplicationRecord
   enum area: [:subang_jaya, :damansara, :ttdi]
   enum category:[:food, :lifestyle, :entertainment]
   acts_as_votable
+  geocoded_by :address, :latitude => :latitude, :longitude => :longitude
+  after_validation :geocode
 end
