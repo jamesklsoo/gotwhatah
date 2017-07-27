@@ -8,11 +8,11 @@
     <%= submit_tag "Search", :name => nil %>
 <% end %>
 
-<% if @event_search.blank? %>
+<% if @event.blank? %>
   <p>There are no events containing the term "<%= params[:search] %>".</p>
 <% else %>
   <tr>
-  <% @event_search.each do |t| %>
+  <% @event.each do |t| %>
    <% u= User.find_by_id(t.user_id) %>
     <td><%= link_to u.username, user_path(t.user_id) %>(<%= u.status %>)</td>
     <td><%= link_to t.title, user_event_path(u.id, t.id) %></td>
