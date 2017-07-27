@@ -5,6 +5,10 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.all
+    if params[:search]
+
+      @event_search = Event.category_search(params[:category_search]).search(params[:search]).order("created_at DESC")
+    end
   end
 
   # GET /events/1
@@ -12,6 +16,7 @@ class EventsController < ApplicationController
   def show
     @event = Event.find_by_id(params[:id])
     @user = User.find_by_id(params[:user_id])
+    commontator_thread_show(@commontable)
   end
 
   # GET /events/new

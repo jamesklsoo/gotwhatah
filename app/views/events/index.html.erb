@@ -2,6 +2,26 @@
 
 <h1>Events</h1>
 
+<%= form_tag(user_events_path, :method => 'get', id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search events or area" %>
+    <%= select_tag "category_search", options_for_select([["food", "food"], ["lifestyle","lifestyle"], ["entertainment","entertainment"]]), include_blank: true %>
+    <%= submit_tag "Search", :name => nil %>
+<% end %>
+
+<% if @event_search.blank? %>
+  <p>There are no events containing the term "<%= params[:search] %>".</p>
+<% else %>
+  <tr>
+  <% @event_search.each do |t| %>
+   <% u= User.find_by_id(t.user_id) %>
+    <td><%= link_to u.username, user_path(t.user_id) %>(<%= u.status %>)</td>
+    <td><%= link_to t.title, user_event_path(u.id, t.id) %></td>
+    <td><%= t.category %></td>
+    <td><%= current_user.distance_to(t.address).round(1) %> kilometres </td>
+  </tr><br>
+  <% end %>
+<% end %>
+
 <table>
   <thead>
     <tr>
@@ -48,7 +68,7 @@
 
   <tbody>
       <tr> 
-      <% Event.near(current_user.address, 30, :units => :km).each do |t| %>
+      <% Event.near(current_user.address, 30).each do |t| %>
         <% u= User.find_by_id(t.user_id) %>
         <td><%= link_to u.username, user_path(t.user_id) %>(<%= u.status %>)</td>
         <td><%= link_to t.title, user_event_path(u.id, t.id) %></td>
