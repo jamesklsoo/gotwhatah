@@ -47,6 +47,6 @@
 <br>
 <%= link_to 'Back', events_path(@event.id) %>
 <br>
-<% if current_user && current_user.id == @event.user_id %>
+<% if current_user == User.find_by_id(Event.find_by_id(params[:id]).user_id)%>
   <%= link_to 'Edit', edit_event_path(@event.id) %> | <%= link_to 'Delete', event_path(@event.id), method: :delete, data: {confirm: "Are you sure?"} %>
 <% end %>

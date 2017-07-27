@@ -8,7 +8,6 @@
     <tr>
       <th>User</th>
       <th>Location</th>
-      <th></th>
       <th>Title</th>
       <th>Description</th>
       <th>Start date</th>
@@ -22,13 +21,14 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <% u= User.find_by_id(current_user) %>
+        <% u= User.find_by_id(event.user_id) %>
         <td><%= u.username %></td>
         <td><%= event.area %></td>
         <td><% if !event.images.empty? %>
             <%= image_tag event.images[0].thumb %>
-          <% end %></td>
-        <td><%= link_to "#{event.title}", user_event_path(event.user_id, event.id) %></td>
+          <% end %>
+          <br>
+          <%= link_to "#{event.title}", user_event_path(event.user_id, event.id) %></td>
         <td><%= event.description %></td>
         <td><%= event.start_date %></td>
         <td><%= event.end_date %></td>

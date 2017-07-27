@@ -1,18 +1,25 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  before_action :correct_user, only: [:edit, :update, :destroy]
+  # before_action :correct_user, only: [:edit, :update, :destroy]
 
 
   # GET /events
   # GET /events.json
   def index
     @events = Event.order(updated_at: :desc)
+
+    if params[:search]
+
+      @event_search = Event.category_search(params[:category_search]).search(params[:search]).order("created_at DESC")
+    end
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
     @event = Event.find(params[:id])
+    @user = User.find_by_id(params[:user_id])
+    @comment = Comment.where(event_id: params[:id])
   end
 
   # GET /events/new
@@ -85,12 +92,12 @@ class EventsController < ApplicationController
 
   end
 
-  def correct_user
-    @event = Event.find_by(id: params[:id])
-    unless current_user?(@event.user)
-      redirect_to user_path(current_user)
-    end
-  end
+  # def correct_user
+  #   @event = Event.find_by(id: params[:id])
+  #   unless current_user?(@event.user)
+  #     redirect_to user_path(current_user)
+  #   end
+  # end
 
   private
   # Use callbacks to share common setup or constraints between actions.
@@ -100,6 +107,6 @@ class EventsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def event_params
-    params.require(:event).permit(:user_id, :area, :title, :description, :start_date, :end_date, :category, :upvote, :downvote, {images: []})
+    params.require(:event).permit(:user_id, :title, :description, :address, :start_date, :end_date, :category, :upvote, :downvote, {images: []})
   end
 end
