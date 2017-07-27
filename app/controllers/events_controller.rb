@@ -16,7 +16,6 @@ class EventsController < ApplicationController
   def show
     @event = Event.find_by_id(params[:id])
     @user = User.find_by_id(params[:user_id])
-    commontator_thread_show(@commontable)
   end
 
   # GET /events/new
