@@ -2,45 +2,41 @@
   <% if event.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
-
       <ul>
-      <% event.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% event.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :area %>
-    <%= form.select :area, options_for_select([["Subang Jaya", "subang_jaya"], ["Damansara", "damansara"], ["TTDI", "ttdi"]]) %>
+  <div class="image-field">
+    <%= form.label :images %>
+    <%= form.file_field :images, multiple: true %>
   </div>
-
   <div class="field">
     <%= form.label :title %>
     <%= form.text_field :title, id: :event_title %>
   </div>
-
   <div class="field">
     <%= form.label :description %>
     <%= form.text_field :description, id: :event_description %>
   </div>
-
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_field :address, id: :event_address %>
+  </div>
   <div class="field">
     <%= form.label :start_date %>
     <%= form.date_select :start_date, id: :event_start_date %>
   </div>
-
   <div class="field">
     <%= form.label :end_date %>
     <%= form.date_select :end_date, id: :event_end_date %>
   </div>
-
   <div class="field">
     <%= form.label :category %>
     <%= form.select :category, options_for_select([["Food", "food"], ["Lifestyle", "lifestyle"], ["Entertainment", "entertainment"]]) %>
   </div>
-
   <div class="actions">
     <%= form.submit %>
   </div>

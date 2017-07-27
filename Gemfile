@@ -8,8 +8,8 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.2'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# Use PG
+gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -33,11 +33,16 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 5.0'
 
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
 
 # Upload photos
 gem 'carrierwave', '~> 1.0'
 gem 'carrierwave-aws'
+gem 'mini_magick'
 
 # Share to Facebook
 gem 'social-share-button'
@@ -57,6 +62,12 @@ gem 'will_paginate', '~> 3.1.0'
 
 # Upload photos
 gem "paperclip", "~> 5.0.0"
+
+# Voting
+gem 'acts_as_votable', '~> 0.10.0'
+
+# Location
+gem 'geocoder'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,5 +1,4 @@
-<h1>New Comment</h1>
-
-<%= render 'form', comment: @comment %>
-
-<%= link_to 'Back', comments_path %>
+<%= form_for [@event, @comment] do |form| %>
+  <%= form.text_field :description, type: 'text', placeholder: 'comment here', required: true %>
+  <%= form.submit %>
+<% end %>

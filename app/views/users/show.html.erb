@@ -1,0 +1,18 @@
+<h1>This is User Profile Page </h1>
+<p>
+  <strong>Username:</strong>
+  <%= @user.username %>
+</p>
+<p>
+  <strong>Status:</strong>
+  <%= @user.status %>
+</p>
+<p>
+  <strong>Address:</strong>
+  <%= @user.address %>
+</p>
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+<%= link_to 'Back', user_events_path(current_user) %>
