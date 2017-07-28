@@ -1,33 +1,9 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="wrap">
-                <p class="form-title">
-                    Sign In</p>
-               <%= form_for :session, url: session_path, class: "login" do |form| %>
-                  <%= form.label :email %>
-                  <%= form.text_field :email, type: 'email' %>
-                  <%= form.label :password %>
-                  <%= form.password_field :password %>
-                  <div align="center"><%= form.submit "Sign In", class: "btn btn-success btn-sm"  %>
-               <div class="remember-forgot">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="checkbox">
-                                <label>
-                                    <input value="1" type="checkbox" />
-                                    Remember Me
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-md-6 forgot-pass-content">
-                          <%= link_to t(".forgot_password"), new_password_path, class: "forgot-pass" %>
-                        </div>
-                         <%= link_to "Back to main", root_path %>
-                    </div>
-                </div>
-                <% end %>
-            </div>
-        </div>
-    </div>
-   
+<div class= "new-session"
+<div id="clearance" class="sign-in">
+  <h2><%= t(".title") %></h2>
+
+  <%= render partial: '/sessions/form' %>
+
+</div>
+
+<%= link_to "Back to main", root_path %>
