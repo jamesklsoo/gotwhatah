@@ -1,4 +1,8 @@
 <%= form_for [@event, @comment] do |form| %>
-  <%= form.text_field :description, type: 'text', placeholder: 'comment here', required: true %>
-  <%= form.submit %>
+  <div class="jumbotron">
+      <%= form.text_area :description, type: 'text', placeholder: 'comment here', required: true,  class: "form-control", rows: "3" %>
+      <%= form.submit %>
+  </div>
 <% end %>
+
+ <%= button_to 'Back', user_events_path(current_user.id), :method => :get, :class => "btn btn-success"  %>
