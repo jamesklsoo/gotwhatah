@@ -1,4 +1,21 @@
 <p id="notice"><%= notice %></p>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand"><%= link_to 'Lokate', user_events_path(current_user.id), :method => :get, :class => "navbar-brand"  %></a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><%= link_to 'Your Profile', user_path(current_user.id), :class => "active" %></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Sign Out", sign_out_path, method: :delete %></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
 <div class="jumbotron">
 <p>
   <strong>Title:</strong>
@@ -61,7 +78,7 @@
   <% end %>
 </p>
 <br>
-<%= button_to 'Add new comment', new_event_comment_path(params[:id]), :method => :get, :class => "btn btn-success" %>
+<%= button_to 'Add new comment', new_event_comment_path(params[:id]), :method => :get, :class => "btn btn-success" %><br>
  <%= button_to 'Back', user_events_path(current_user.id), :method => :get, :class => "btn btn-success"  %>
 <br>
 <% if current_user == User.find_by_id(Event.find_by_id(params[:id]).user_id)%>
