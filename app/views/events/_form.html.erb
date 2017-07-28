@@ -1,4 +1,5 @@
 <%= form_with(model: [current_user, event], local: true) do |form| %>
+<form class="form-horizontal">
   <% if event.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
@@ -10,34 +11,59 @@
     </div>
   <% end %>
   <div class="image-field">
-    <%= form.label :images %>
-    <%= form.file_field :images, multiple: true %>
+    <p>
+      <strong><%= form.label :images %></strong>
+      <%= form.file_field :images, multiple: true %>
+    </p>
+  </div>
+
+  <div class="field">
+    <p>
+      <strong><%= form.label :title %></strong>
+      <%= form.text_field :title, id: :event_title %>
+    </p>
+  </div>
+
+  <div class="form-group">
+    <p>
+    <strong><%= form.label :description, class: "col-lg-2 control-label" %></strong>
+    <div class="col-lg-10">
+      <%= form.text_area :description, id: :event_description, class: "form-control", rows: "3" %>
+    </div>
+    </p>
+  </div>
+
+  <div class="form-group">
+    <p>
+      <strong><%= form.label :address, class: "col-lg-2 control-label" %></strong>
+      <div class="col-lg-10">
+        <%= form.text_area :address, id: :event_address, class: "form-control", rows: "3" %>
+      </div>
+    </p>
+  </div>
+
+  <div class="field">
+    <p>
+      <strong><%= form.label :start_date %></strong>
+      <%= form.date_select :start_date, id: :event_start_date %>
+    </p>
   </div>
   <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, id: :event_title %>
+    <p>
+      <strong><%= form.label :end_date %></strong>
+      <%= form.date_select :end_date, id: :event_end_date %>
+    </p>
   </div>
+
   <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description, id: :event_description %>
+    <p>
+      <strong><%= form.label :category %></strong>
+      <%= form.select :category, options_for_select([["Food", "food"], ["Lifestyle", "lifestyle"], ["Entertainment", "entertainment"]]) %>
+    </p>
   </div>
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address, id: :event_address %>
-  </div>
-  <div class="field">
-    <%= form.label :start_date %>
-    <%= form.date_select :start_date, id: :event_start_date %>
-  </div>
-  <div class="field">
-    <%= form.label :end_date %>
-    <%= form.date_select :end_date, id: :event_end_date %>
-  </div>
-  <div class="field">
-    <%= form.label :category %>
-    <%= form.select :category, options_for_select([["Food", "food"], ["Lifestyle", "lifestyle"], ["Entertainment", "entertainment"]]) %>
-  </div>
+
   <div class="actions">
-    <%= form.submit %>
+    <strong><%= form.submit %></strong>
   </div>
+</form>
 <% end %>

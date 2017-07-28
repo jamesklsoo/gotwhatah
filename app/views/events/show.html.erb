@@ -1,8 +1,5 @@
 <p id="notice"><%= notice %></p>
-<p>
-  <strong>User:</strong>
-  <%= @event.user_id %>
-</p>
+<div class="jumbotron">
 <p>
   <strong>Title:</strong>
   <%= @event.title %>
@@ -53,8 +50,10 @@
   <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?center=#{@event.latitude},#{@event.longitude}&zoom=13&size=600x300&markers=color:blue%7Clabel:E%7C#{@event.latitude},#{@event.longitude}&markers=color:red%7Clabel:U%7C#{current_user.latitude},#{current_user.longitude}&maptype=roadmap&key=#{ENV['GOOGLE_API_KEY']}" %>
 <% end %>
 <p>
-  <strong>User Comments:</strong>
-  <% unless @comment.nil? %>
+  <strong>User Comments:</strong> 
+  <% if @comment.empty? %>
+    <p>There are currently no user comments.</p>
+  <% else %>
     <% @comment.each do |comment| %>
       <%= User.find_by_id(comment.user_id).username %>
       <%= comment.description %><br>
@@ -62,9 +61,10 @@
   <% end %>
 </p>
 <br>
-<%= link_to 'Add new comment', new_event_comment_path(params[:id]) %> | 
-<%= link_to 'Back', events_path(@event.id) %>
+<%= button_to 'Add new comment', new_event_comment_path(params[:id]), :method => :get, :class => "btn btn-success" %>
+ <%= button_to 'Back', user_events_path(current_user.id), :method => :get, :class => "btn btn-success"  %>
 <br>
 <% if current_user == User.find_by_id(Event.find_by_id(params[:id]).user_id)%>
   <%= link_to 'Edit', edit_event_path(@event.id) %> | <%= link_to 'Delete', event_path(@event.id), method: :delete, data: {confirm: "Are you sure?"} %>
 <% end %>
+</div>
