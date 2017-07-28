@@ -1,70 +1,85 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand"><%= link_to 'Lokate', user_events_path(current_user.id), :method => :get, :class => "navbar-brand"  %></a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><%= link_to 'Your Profile', user_path(current_user.id), :class => "active" %></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Sign Out", sign_out_path, method: :delete %></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 <p id="notice"><%= notice %></p>
 <div class="jumbotron">
-<p>
-  <strong>Title:</strong>
-  <%= @event.title %>
-</p>
-<p>
-  <% if !@event.images.empty? %>
-    <%= image_tag @event.images[0] %>
-  <% end %>
-</p>
-<p>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</p>
-<p>
-  <strong>Address:</strong>
-  <%= @event.address %>
-</p>
-<p>
-  <strong>Start date:</strong>
-  <%= @event.start_date %>
-</p>
-<p>
-  <strong>End date:</strong>
-  <%= @event.end_date %>
-</p>
-<p>
-  <strong>Category:</strong>
-  <%= @event.category %>
-</p>
-<p>
-  <strong>Likes:</strong>
-  <%= @event.get_upvotes.size %>
-</p>
-<p>
-  <strong>Dislikes:</strong>
-  <%= @event.get_downvotes.size %>
-</p>
-<p>
-  <strong>Distance from you:</strong>
-  <%= current_user.distance_to(@event.address).round(1) %> kilometres 
-</p>
-<br>
-<p>
-  <%= social_share_button_tag("#{@event.title} #{@event.description} #{@event.address}") %>
-</p>
-<br>
-<%= link_to "https://www.google.com/maps/dir/?api=1&origin=#{current_user.latitude},#{current_user.longitude}&destination=#{@event.latitude},#{@event.longitude}" do %>
-  <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?center=#{@event.latitude},#{@event.longitude}&zoom=13&size=600x300&markers=color:blue%7Clabel:E%7C#{@event.latitude},#{@event.longitude}&markers=color:red%7Clabel:U%7C#{current_user.latitude},#{current_user.longitude}&maptype=roadmap&key=#{ENV['GOOGLE_API_KEY']}" %>
-<% end %>
-<p>
-  <strong>User Comments:</strong> 
-  <% if @comment.empty? %>
-    <p>There are currently no user comments.</p>
-  <% else %>
-    <% @comment.each do |comment| %>
-      <%= User.find_by_id(comment.user_id).username %>
-      <%= comment.description %><br>
+  <p>
+    <strong>Title:</strong>
+    <%= @event.title %>
+  </p>
+  <p>
+    <% if !@event.images.empty? %>
+      <%= image_tag @event.images[0] %>
     <% end %>
+  </p>
+  <p>
+    <strong>Description:</strong>
+    <%= @event.description %>
+  </p>
+  <p>
+    <strong>Address:</strong>
+    <%= @event.address %>
+  </p>
+  <p>
+    <strong>Start date:</strong>
+    <%= @event.start_date %>
+  </p>
+  <p>
+    <strong>End date:</strong>
+    <%= @event.end_date %>
+  </p>
+  <p>
+    <strong>Category:</strong>
+    <%= @event.category %>
+  </p>
+  <p>
+    <strong>Likes:</strong>
+    <%= @event.get_upvotes.size %>
+  </p>
+  <p>
+    <strong>Dislikes:</strong>
+    <%= @event.get_downvotes.size %>
+  </p>
+  <p>
+    <strong>Distance from you:</strong>
+    <%= current_user.distance_to(@event.address).round(1) %> kilometres 
+  </p>
+  <br>
+  <p>
+    <%= social_share_button_tag("#{@event.title} #{@event.description} #{@event.address}") %>
+  </p>
+  <br>
+  <%= link_to "https://www.google.com/maps/dir/?api=1&origin=#{current_user.latitude},#{current_user.longitude}&destination=#{@event.latitude},#{@event.longitude}" do %>
+    <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?center=#{@event.latitude},#{@event.longitude}&zoom=13&size=600x300&markers=color:blue%7Clabel:E%7C#{@event.latitude},#{@event.longitude}&markers=color:red%7Clabel:U%7C#{current_user.latitude},#{current_user.longitude}&maptype=roadmap&key=#{ENV['GOOGLE_API_KEY']}" %>
   <% end %>
-</p>
-<br>
-<%= button_to 'Add new comment', new_event_comment_path(params[:id]), :method => :get, :class => "btn btn-success" %>
- <%= button_to 'Back', user_events_path(current_user.id), :method => :get, :class => "btn btn-success"  %>
-<br>
-<% if current_user == User.find_by_id(Event.find_by_id(params[:id]).user_id)%>
-  <%= link_to 'Edit', edit_event_path(@event.id) %> | <%= link_to 'Delete', event_path(@event.id), method: :delete, data: {confirm: "Are you sure?"} %>
-<% end %>
+  <p>
+    <strong>User Comments:</strong>
+    <% if @comment.empty? %>
+      <p>There are currently no user comments.</p>
+    <% else %>
+      <% @comment.each do |comment| %>
+        <%= User.find_by_id(comment.user_id).username %>
+        <%= comment.description %><br>
+      <% end %>
+    <% end %>
+  </p>
+  <br>
+  <%= button_to 'Add new comment', new_event_comment_path(params[:id]), :method => :get, :class => "btn btn-success" %>
+  <%= button_to 'Back', user_events_path(current_user.id), :method => :get, :class => "btn btn-success"  %>
+  <br>
+  <% if current_user == User.find_by_id(Event.find_by_id(params[:id]).user_id)%>
+    <%= link_to 'Edit', edit_event_path(@event.id) %> | <%= link_to 'Delete', event_path(@event.id), method: :delete, data: {confirm: "Are you sure?"} %>
+  <% end %>
 </div>

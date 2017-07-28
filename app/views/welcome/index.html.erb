@@ -1,41 +1,42 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand">Lokate
-      </a>
-    </div>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Sign In",  sign_in_path %></li>
-        <li><%= link_to "Sign Up", sign_up_path %></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-<div class="header">
-  <h1>Welcome to Lokate</h1>
-</div>
-<h1>Events</h1>
-<table class="table table-striped table-hover ">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Category</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @events.each do |event| %>
-      <tr>
-        <td><%= event.title %></td>
-        <td><%= event.category %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<link rel="stylesheet" href="http://cdn.bootcss.com/animate.css/3.5.1/animate.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" media="all">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet" media="all">
+<div class="container-fluid">
+  <div class="row">
+    <div id="sg-carousel" class="carousel slide carousel-fade" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carousel" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel" data-slide-to="1" class=""></li>
+      </ol>
+      <!-- Carousel items -->
+      <div class="carousel-inner carousel-zoom">
+        <div class="item active"><img class="img-responsive" src="https://ununsplash.imgix.net/photo-1416339134316-0e91dc9ded92?q=75&fm=jpg&s=883a422e10fc4149893984019f63c818" alt="">
+          <div class="carousel-caption">
+            <h1  data-animation="animated zoomInLeft" class="cap-txt ">Welcome to Lokate!</h1>
+            <%= button_to "sign up", sign_up_path, :method => :get, :class => "btn btn-info" %>
+            <%= button_to "sign in", sign_in_path, :method => :get, :class => "btn btn-warning" %>
+          </div>
+        </div>
+        <div class="item"><img class="img-responsive" src="https://brightcove04pmdo-a.akamaihd.net/5104226627001/5104226627001_5230061447001_5203619434001-vs.jpg?pubId=5104226627001&videoId=5203619434001" alt="">
+          <div class="carousel-caption">
+            <h1 data-animation="animated zoomInLeft" class="cap-txt"><u>Trending Events</u></h1>
+            <% @events.limit(5).each do |event| %>
+              <div class="row">
+                <div class="col-md-6">
+                  <h1  data-animation="animated zoomInLeft" class="cap-txt "><font size="6.5">Event Name:</h1>
+                    <h2 data-animation="animated bounceInDown"><font size="5"><%= event.title %></h2>
+                    </div>
+                    <div class="col-md-6">
+                      <h1  data-animation="animated zoomInLeft" class="cap-txt "><font size="6.5">Location:</h1>
+                        <h2 data-animation="animated bounceInDown"><font size="5"><%= event.address %></h2>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+                <!-- Carousel nav -->
+                <a class="carousel-control left" href="#sg-carousel" data-slide="prev">‹</a>
+                <a class="carousel-control right" href="#sg-carousel" data-slide="next">›</a>
+              </div>
+            </div>
+          </div>
