@@ -13,12 +13,18 @@
   }
 }
 
+.container-fluid {
+  background-color:white;
+
+}
+
 .btn-lg {
-  background-color: lightblue;
+  background-color: white;
 }
 
 .jumbotron {
-  background-color: lightblue;
+  padding-top: 5px;
+  background-color: white;
 }
 
 h1 { 
@@ -31,4 +37,49 @@ text-align: center;
 
 h3 { 
 text-align: center;
+}
+
+h4 { 
+text-align: center;
+}
+
+.table {
+  background-color: rgba(255, 255, 255, 0.4)
+}
+
+.whole-page {
+  background-color:  white;
+}
+
+.header {
+  background-color:  #FFC107;
+}
+
+.content {
+  background-color: white;
+}
+
+.title-box {
+  background-color: pink;
+  padding-bottom: 90px;
+
+}
+
+.navbar-header {
+  display: inline-block;
+
+}
+
+.image {
+  content:url(https://preview.ibb.co/m67rQQ/eau_de_parfum.jpg);
+  margin: auto;
+}
+
+.btn {
+  border-radius: 0px !important;
+  padding-bottom: 5px;
+}
+
+#sign-out-link {
+  border: 0px;
 }

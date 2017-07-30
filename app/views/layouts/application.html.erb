@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html >
   <head>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= csrf_meta_tag %>
-    <title>Got What Ah?</title>
+    <title>Lokate</title>
   </head>
   <body>
-    <%= yield %>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>
