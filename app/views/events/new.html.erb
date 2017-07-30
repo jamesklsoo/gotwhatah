@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand"><%= link_to 'Lokate', user_events_path(current_user.id), :method => :get, :class => "navbar-brand"  %></a>
+      <a class="navbar-brand"><%= link_to image_tag("Lokate.jpg", :id => 'navbar-brand'), user_events_path(current_user.id), :method => :get, :class => "navbar-brand"  %></a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
@@ -13,7 +13,6 @@
     </div>
   </div>
 </nav>
-
 <h2>New Event</h2>
 <div class="jumbotron">
   <%= render 'form', event: @event %>
