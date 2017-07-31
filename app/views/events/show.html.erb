@@ -65,12 +65,13 @@
     <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?center=#{@event.latitude},#{@event.longitude}&zoom=13&size=600x300&markers=color:blue%7Clabel:E%7C#{@event.latitude},#{@event.longitude}&markers=color:red%7Clabel:U%7C#{current_user.latitude},#{current_user.longitude}&maptype=roadmap&key=#{ENV['GOOGLE_API_KEY']}" %>
   <% end %>
   <p>
-    <strong>User Comments:</strong>
+    <strong>User Comments:</strong><br>
+    <br>
     <% if @comment.empty? %>
       <p>There are currently no user comments.</p>
     <% else %>
       <% @comment.each do |comment| %>
-        <%= User.find_by_id(comment.user_id).username %>
+        <b><%= User.find_by_id(comment.user_id).username %></b>
         <%= comment.description %><br>
       <% end %>
     <% end %>
