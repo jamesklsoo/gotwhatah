@@ -11,9 +11,9 @@ class User < ApplicationRecord
   after_validation :geocode
 
   def check_status(user)
-    if Event.where(user_id: user.id).count == 0 || Event.where(user_id: user.id).count <10
+    if Event.where(user_id: user.id).count == 0 || Event.where(user_id: user.id).count < 5
       user.newbie!
-    elsif Event.where(user_id: user.id).count > 9 || Event.where(user_id: user.id).count <20
+    elsif Event.where(user_id: user.id).count > 4 || Event.where(user_id: user.id).count < 10
       user.intermediate!
     else
       user.expert!
